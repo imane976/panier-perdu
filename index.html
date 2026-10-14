@@ -3,24 +3,132 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Panier Perdu — Récupère tes paniers abandonnés</title>
-  <meta name="description" content="Relance automatique des paniers abandonnés pour les petites boutiques Shopify. 29 € par mois, relances illimitées.">
-  <style>
-    :root { --encre: #1b1b1f; --accent: #d9480f; --fond: #fbf8f3; }
-    * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px;
-           background: var(--fond); color: var(--encre);
-           font-family: Georgia, "Times New Roman", serif; }
-    main { max-width: 32rem; }
-    h1 { font-size: 2rem; line-height: 1.15; margin: 0 0 1rem; }
-    p { font-size: 1.125rem; line-height: 1.5; margin: 0; }
-    strong { color: var(--accent); }
-  </style>
+  <title>Panier Perdu — Récupère les paniers abandonnés de ta boutique</title>
+  <meta name="description" content="Panier Perdu relance par email les paniers abandonnés des petites boutiques Shopify. 29 € par mois, relances illimitées, sans engagement.">
+  <link rel="canonical" href="https://panier-perdu-five-omega.vercel.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Panier Perdu">
+  <meta property="og:title" content="Tes clients ont rempli leur panier. Ils sont partis. Récupère-les.">
+  <meta property="og:description" content="Relance automatique des paniers abandonnés pour les petites boutiques Shopify. 29 € par mois, relances illimitées.">
+  <meta property="og:url" content="https://panier-perdu-five-omega.vercel.app/">
+  <meta property="og:image" content="https://panier-perdu-five-omega.vercel.app/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#fbf7f0">
+  <link rel="stylesheet" href="/style.css">
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
+  <header class="top">
+    <div class="wrap">
+      <a class="marque" href="/">Panier <b>Perdu</b></a>
+      <span class="tag">Boutiques Shopify</span>
+    </div>
+  </header>
+
   <main>
-    <h1>Panier Perdu</h1>
-    <p>Récupère les paniers abandonnés de ta boutique. <strong>Page en construction</strong> : la vraie page arrive très bientôt.</p>
+    <section class="hero">
+      <div class="wrap">
+        <h1>Tes clients ont rempli leur panier. Ils sont partis. <em>Récupère-les.</em></h1>
+        <p class="lead" style="margin-top:1.25rem">Panier Perdu relance par email les paniers abandonnés de ta boutique Shopify, avec deux messages personnalisés. 29 € par mois, relances illimitées.</p>
+        <a class="btn" href="#offre" data-pay>Réserver ma place Fondateur</a>
+        <p class="micro">Sans engagement · Remboursé sous 30 jours</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="chiffre">7 sur 10</div>
+        <h2 style="margin-top:.5rem">des paniers en ligne ne sont jamais payés.</h2>
+        <p class="source">Ordre de grandeur moyen observé par le Baymard Institute sur le commerce en ligne.</p>
+        <p>Les grosses solutions de relance sont vendues au volume et coûtent trop cher pour une petite boutique. Résultat : la plupart des boutiques ne relancent rien du tout, et l'argent reste sur la table.</p>
+
+        <div class="calcul" role="group" aria-label="Exemple chiffré">
+          <dl>
+            <div class="l"><dt>Commandes par mois</dt><dd>40</dd></div>
+            <div class="l"><dt>Panier moyen</dt><dd>60 €</dd></div>
+            <div class="l"><dt>Paniers abandonnés</dt><dd>≈ 93</dd></div>
+            <div class="l"><dt>Valeur de ces paniers</dt><dd>≈ 5 600 €</dd></div>
+            <div class="l"><dt>Si seulement 5 % reviennent</dt><dd>≈ 280 € / mois</dd></div>
+          </dl>
+        </div>
+        <p class="source">Exemple de calcul, pas une promesse de résultat : tes chiffres seront différents. Pour comparaison, Panier Perdu coûte 29 € par mois.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>Ce que tu obtiens</h2>
+        <ol class="benefices">
+          <li><h3>Deux relances, au bon moment</h3><p>Un premier rappel, puis un second quelques heures plus tard. Chaque email reprend les produits que ton client avait choisis.</p></li>
+          <li><h3>Un code de réduction, si tu veux</h3><p>Tu peux glisser un code promo dans la seconde relance. Tu l'actives ou non, c'est toi qui décides.</p></li>
+          <li><h3>Un compteur en euros</h3><p>Tu vois en clair combien d'argent les relances t'ont fait récupérer. Pas de jargon, pas de tableau de bord à déchiffrer.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="offre">
+      <div class="wrap">
+        <div class="offre">
+          <h2>Place Fondateur</h2>
+          <p>Panier Perdu est en construction. Les premiers abonnés rejoignent maintenant, avant l'ouverture, et ils orientent ce que je construis en priorité.</p>
+          <div class="prix">29 €<small> / mois</small></div>
+          <p class="jour">soit 0,97 € par jour</p>
+          <ul>
+            <li>Relances illimitées pour une boutique Shopify</li>
+            <li>Tu paies 29 € aujourd'hui : c'est ton premier mois. Il ne démarre qu'à l'ouverture de ton accès.</li>
+            <li>Ton prix de 29 € est maintenu tant que ton abonnement reste actif</li>
+            <li>Accès ouvert au plus tard le 30 novembre 2026</li>
+          </ul>
+          <div class="garantie">
+            <strong>Satisfait ou remboursé, 30 jours</strong>
+            Pas convaincu ? Écris à imanemadjinda2@gmail.com dans les 30 jours qui suivent l'ouverture de ton accès. Je te rembourse sous 7 jours. Et si ton accès n'est pas ouvert le 30 novembre 2026, tu es remboursé intégralement sur simple demande.
+          </div>
+          <a class="btn" href="mailto:imanemadjinda2@gmail.com?subject=Place%20Fondateur%20Panier%20Perdu" data-pay>Réserver ma place Fondateur</a>
+          <p class="micro">Sans engagement, résiliable à tout moment</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>Questions fréquentes</h2>
+        <details>
+          <summary>Est-ce que ça marche pour ma boutique ?</summary>
+          <p>Panier Perdu est conçu pour les boutiques Shopify qui font quelques dizaines de commandes par mois. WooCommerce n'est pas disponible au lancement : si c'est ton cas, écris-moi et je te préviens quand ce sera prêt.</p>
+        </details>
+        <details>
+          <summary>Combien de temps ça me prend ?</summary>
+          <p>Tu connectes ta boutique une seule fois, puis tu règles tes deux messages. Ensuite les relances partent toutes seules, sans rien à faire de ton côté.</p>
+        </details>
+        <details>
+          <summary>Et si je veux arrêter ?</summary>
+          <p>Tu arrêtes quand tu veux, sans frais ni préavis : un simple email suffit. Et pendant les 30 jours qui suivent l'ouverture de ton accès, tu peux aussi demander le remboursement.</p>
+        </details>
+        <details>
+          <summary>À quoi sert exactement ce que je paie ?</summary>
+          <p>À l'accès au service : la lecture de tes paniers abandonnés, l'envoi des deux relances, le code de réduction facultatif et le compteur d'argent récupéré. Les relances sont illimitées, il n'y a pas de frais au volume.</p>
+        </details>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    <div class="wrap">
+      <nav aria-label="Pied de page">
+        <a href="/mentions-legales.html">Mentions légales</a>
+        <a href="/cgv.html">Conditions générales de vente</a>
+        <a href="/confidentialite.html">Confidentialité</a>
+        <a href="mailto:imanemadjinda2@gmail.com">Contact</a>
+      </nav>
+      <p>© 2026 Panier Perdu</p>
+    </div>
+  </footer>
+
+  <div class="barre">
+    <a class="btn" href="#offre">Réserver ma place Fondateur</a>
+  </div>
 </body>
 </html>
