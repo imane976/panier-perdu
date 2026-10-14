@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Combien te coûtent tes paniers abandonnés ? — Panier Perdu</title>
+  <meta name="description" content="Trois questions, trente secondes : estime ce que les paniers abandonnés de ta boutique te coûtent chaque mois. Gratuit.">
+  <meta property="og:title" content="Combien te coûtent tes paniers abandonnés ?">
+  <meta property="og:description" content="Trois questions, trente secondes. Gratuit.">
+  <meta property="og:image" content="https://panier-perdu-five-omega.vercel.app/og.png">
+  <meta name="theme-color" content="#fbf7f0">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .progress { height: 6px; background: var(--fond-2); border-radius: 3px; overflow: hidden; margin: 1.25rem 0 .5rem; }
+    .progress i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .25s; }
+    .etape { font-size: .875rem; color: var(--encre-douce); margin-bottom: 1.25rem; }
+    .choix { display: grid; gap: .75rem; margin-top: 1.25rem; }
+    .choix button {
+      font: inherit; text-align: left; cursor: pointer; width: 100%; min-height: 3.5rem;
+      padding: .9rem 1rem; background: var(--fond); color: var(--encre);
+      border: 2px solid var(--trait); border-radius: 6px; font-weight: 600;
+    }
+    .choix button:active, .choix button:focus-visible { border-color: var(--accent); outline: none; }
+    .email { background: var(--fond-2); border: 1px solid var(--trait); border-radius: 6px; padding: 1rem; font-size: .975rem; white-space: pre-line; }
+    .verrou { position: relative; margin-top: 1rem; }
+    .verrou .email { filter: blur(5px); user-select: none; }
+    .verrou span { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 700; text-align: center; padding: 1rem; }
+    .retour { background: none; border: 0; font: inherit; color: var(--encre-douce); text-decoration: underline; cursor: pointer; min-height: 2.75rem; padding: 0; margin-top: 1rem; }
+    [hidden] { display: none !important; }
+  </style>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body style="padding-bottom:0">
+  <header class="top"><div class="wrap"><a class="marque" href="/">Panier <b>Perdu</b></a><span class="tag">Gratuit · 30 secondes</span></div></header>
+
+  <main>
+    <section id="quiz" style="border:0">
+      <div class="wrap">
+        <div class="progress" aria-hidden="true"><i id="barre"></i></div>
+        <p class="etape" id="etape" aria-live="polite"></p>
+        <h1 id="question" style="font-size:clamp(1.75rem,7vw,2.5rem)" tabindex="-1"></h1>
+        <div class="choix" id="choix"></div>
+        <button class="retour" id="retour" hidden type="button">← Question précédente</button>
+      </div>
+    </section>
+
+    <section id="resultat" hidden style="border:0">
+      <div class="wrap">
+        <p class="source" id="recap"></p>
+        <h1 style="font-size:clamp(1.75rem,7vw,2.5rem)" tabindex="-1" id="titreResultat">Voilà ce que ça te coûte.</h1>
+        <div class="chiffre" id="perdu" style="margin-top:1rem"></div>
+        <p style="margin-top:.5rem">de ventes potentielles qui partent chaque mois avec les paniers abandonnés de ta boutique.</p>
+        <div class="calcul" role="group" aria-label="Détail du calcul">
+          <dl>
+            <div class="l"><dt>Commandes par mois</dt><dd id="r1"></dd></div>
+            <div class="l"><dt>Panier moyen</dt><dd id="r2"></dd></div>
+            <div class="l"><dt>Paniers abandonnés (estimation)</dt><dd id="r3"></dd></div>
+            <div class="l"><dt>Valeur de ces paniers</dt><dd id="r4"></dd></div>
+            <div class="l"><dt>Si seulement 5 % reviennent</dt><dd id="r5"></dd></div>
+          </dl>
+        </div>
+        <p class="source">Estimation, pas une promesse de résultat. Base : environ 7 paniers sur 10 sont abandonnés en ligne (ordre de grandeur du Baymard Institute) et 5 % de récupération, une hypothèse prudente à vérifier sur ta boutique.</p>
+        <p id="phrase"></p>
+
+        <h2 style="margin-top:2rem">Ton premier email de relance, prêt à l'emploi</h2>
+        <p>Un premier aperçu, que tu peux déjà copier dans l'outil d'email de ta boutique :</p>
+        <div class="email" id="mail1">Objet : Tu as oublié quelque chose dans ton panier
+
+Bonjour {prénom},
+
+Tu as laissé ces articles dans ton panier :
+{produits}
+
+Ils sont toujours disponibles, mais le stock peut bouger. Tu peux reprendre là où tu t'es arrêté·e :
+{lien du panier}
+
+Si tu as une question, réponds simplement à cet email.
+
+{ton prénom ou le nom de ta boutique}</div>
+
+        <div class="verrou" aria-label="Deuxième relance, réservée aux abonnés">
+          <div class="email" aria-hidden="true">Objet : Ton panier t'attend, avec un petit geste
+
+Bonjour {prénom}, on t'a gardé ton panier. Voici un code de réduction de {X} % valable {durée} :
+{code}
+
+{produits}
+{lien du panier}</div>
+          <span>La 2ᵉ relance, avec ton code de réduction facultatif, est incluse dans l'abonnement.</span>
+        </div>
+
+        <a class="btn" href="/#offre" style="margin-top:1.5rem">Réserver ma place Fondateur · 29 €/mois</a>
+        <p class="micro">Sans engagement · Remboursé sous 30 jours</p>
+        <button class="retour" id="refaire" type="button">Refaire le calcul</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <nav aria-label="Pied de page">
+        <a href="/mentions-legales.html">Mentions légales</a>
+        <a href="/cgv.html">Conditions générales de vente</a>
+        <a href="/confidentialite.html">Confidentialité</a>
+        <a href="mailto:imanemadjinda2@gmail.com">Contact</a>
+      </nav>
+      <p>© 2026 Panier Perdu</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var questions = [
+        { q: "Combien de commandes ta boutique reçoit-elle par mois ?",
+          o: [["Moins de 20", 12], ["20 à 50", 35], ["50 à 100", 75], ["Plus de 100", 150]] },
+        { q: "Quel est ton panier moyen ?",
+          o: [["Moins de 30 €", 22], ["30 à 60 €", 45], ["60 à 100 €", 80], ["Plus de 100 €", 130]] },
+        { q: "Et aujourd'hui, tu relances les paniers abandonnés ?",
+          o: [["Non, aucune relance", 0], ["Oui, à la main, quand j'y pense", 1], ["Oui, un email automatique de base", 2]] }
+      ];
+      var rep = [], i = 0;
+      var $ = function (id) { return document.getElementById(id); };
+      var eur = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+      var nb = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
+
+      function show() {
+        var s = questions[i];
+        $("barre").style.width = (i / questions.length * 100) + "%";
+        $("etape").textContent = "Question " + (i + 1) + " sur " + questions.length;
+        $("question").textContent = s.q;
+        $("retour").hidden = i === 0;
+        var box = $("choix"); box.textContent = "";
+        s.o.forEach(function (opt) {
+          var b = document.createElement("button");
+          b.type = "button"; b.textContent = opt[0];
+          b.addEventListener("click", function () {
+            rep[i] = { label: opt[0], v: opt[1] };
+            i++; if (i < questions.length) { show(); } else { result(); }
+          });
+          box.appendChild(b);
+        });
+        $("question").focus({ preventScroll: true });
+      }
+
+      function result() {
+        var commandes = rep[0].v, panier = rep[1].v, relance = rep[2].v;
+        var abandons = commandes * 7 / 3;
+        var valeur = abandons * panier;
+        var recup = valeur * 0.05;
+        $("barre").style.width = "100%";
+        $("quiz").hidden = true; $("resultat").hidden = false;
+        $("recap").textContent = "Tes réponses : " + rep[0].label + " commandes · panier " + rep[1].label.toLowerCase() + " · " + rep[2].label.toLowerCase();
+        $("perdu").textContent = eur.format(valeur);
+        $("r1").textContent = "≈ " + nb.format(commandes);
+        $("r2").textContent = "≈ " + eur.format(panier);
+        $("r3").textContent = "≈ " + nb.format(abandons);
+        $("r4").textContent = "≈ " + eur.format(valeur);
+        $("r5").textContent = "≈ " + eur.format(recup) + " / mois";
+        var fois = recup / 29;
+        var p = "À 5 % de récupération, ce serait environ " + eur.format(recup) + " par mois, à comparer aux 29 € de Panier Perdu";
+        p += fois >= 1.5 ? " : soit environ " + nb.format(fois) + " fois le prix." : ".";
+        if (fois < 1) p += " À ce niveau de ventes, le gain reste modeste : sois lucide, le service sera surtout rentable si ta boutique grandit.";
+        if (relance === 0) p += " Aujourd'hui tu ne relances rien : tout ce montant dort.";
+        if (relance === 1) p += " Tu relances à la main : avec l'automatique, aucun panier n'est oublié.";
+        if (relance === 2) p += " Tu as déjà un email de base : une seconde relance avec code de réduction peut faire la différence.";
+        $("phrase").textContent = p;
+        $("titreResultat").focus({ preventScroll: true });
+        window.scrollTo(0, 0);
+      }
+
+      $("retour").addEventListener("click", function () { if (i > 0) { i--; show(); } });
+      $("refaire").addEventListener("click", function () {
+        rep = []; i = 0; $("resultat").hidden = true; $("quiz").hidden = false; show(); window.scrollTo(0, 0);
+      });
+      show();
+    })();
+  </script>
+</body>
+</html>
