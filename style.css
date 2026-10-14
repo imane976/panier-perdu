@@ -96,7 +96,7 @@ footer a { min-height: 2.75rem; display: inline-flex; align-items: center; }
 .page-texte h2 { font-size: 1.375rem; margin: 2rem 0 .5rem; }
 .page-texte section { border: 0; padding: 0; }
 .a-completer { background: #fde68a; padding: 0 .25rem; border-radius: 3px; font-weight: 600; }
-.centre { text-align: center; padding: 4rem 0; }
+.centre { text-align: center; padding: 4rem 1.25rem; }
 .centre .chiffre { font-size: clamp(4rem, 22vw, 7rem); }
 .centre .btn { max-width: 20rem; margin: 1.5rem auto 0; }
 
