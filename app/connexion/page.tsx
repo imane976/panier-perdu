@@ -1,15 +1,20 @@
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import { supabaseServeur } from "@/lib/supabase/server";
 
 async function envoyerLien(formData: FormData) {
   "use server";
   const email = String(formData.get("email") ?? "").trim();
   if (!email.includes("@")) return;
+  const h = await headers();
+  const host = h.get("x-forwarded-host") ?? h.get("host");
+  const proto = h.get("x-forwarded-proto") ?? "https";
+  const base = `${proto}://${host}`;
   const supabase = await supabaseServeur();
   await supabase.auth.signInWithOtp({
     email,
-    options: { emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback` },
+    options: { emailRedirectTo: `${base}/auth/callback` },
   });
-  const { redirect } = await import("next/navigation");
   redirect("/connexion?envoye=1");
 }
 
