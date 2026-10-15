@@ -18,7 +18,7 @@ export default async function Compte() {
 
   const { data: abo } = await supabase.from("subscriptions").select("status").maybeSingle();
   const { data: recoveries } = await supabase.from("recoveries").select("amount_cents");
-  const total = (recoveries ?? []).reduce((s, r) => s + r.amount_cents, 0);
+  const total = (recoveries ?? []).reduce((s: number, r: { amount_cents: number }) => s + r.amount_cents, 0);
   const actif = abo && ["active", "trialing", "paid"].includes(abo.status);
 
   return (
