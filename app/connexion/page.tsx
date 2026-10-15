@@ -11,18 +11,24 @@ async function envoyerLien(formData: FormData) {
   const proto = h.get("x-forwarded-proto") ?? "https";
   const base = `${proto}://${host}`;
   const supabase = await supabaseServeur();
-  await supabase.auth.signInWithOtp({
+  const { error } = await supabase.auth.signInWithOtp({
     email,
     options: { emailRedirectTo: `${base}/auth/callback` },
   });
+  if (error) redirect(`/connexion?erreur=${encodeURIComponent(error.message)}`);
   redirect("/connexion?envoye=1");
 }
 
-export default async function Connexion({ searchParams }: { searchParams: Promise<{ envoye?: string }> }) {
-  const { envoye } = await searchParams;
+export default async function Connexion({ searchParams }: { searchParams: Promise<{ envoye?: string; erreur?: string }> }) {
+  const { envoye, erreur } = await searchParams;
   return (
     <main className="mx-auto max-w-md px-5 py-16">
       <h1 className="font-serif text-3xl font-bold">Connexion</h1>
+      {erreur && (
+        <p className="mb-4 rounded border border-red-300 bg-red-50 p-4 text-red-800">
+          Le mail n’a pas pu partir : {erreur}
+        </p>
+      )}
       {envoye ? (
         <p className="mt-6 rounded border border-trait bg-fond2 p-4">
           C’est parti ! Ouvre ta boîte mail : un lien de connexion vient de t’être envoyé. Pense à regarder dans les spams.
